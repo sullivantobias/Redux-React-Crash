@@ -1,9 +1,9 @@
-import { ADD_ARTICLE } from "../constants/action-types";
-import { foundBadWord } from "../actions";
+import { ADD_ARTICLE, REMOVE_ARTICLE } from "../constants/action-types";
+import { handleError } from "../actions";
 
 const forbiddenWords = ["spam", "money"];
 
-export const forbiddenWordsMiddleware = ( { dispatch } ) => {
+export const errorMiddleware = ( { dispatch, getState } ) => {
   return function ( next ) {
     return function ( action ) {
       if (action.type === ADD_ARTICLE) {
@@ -11,9 +11,13 @@ export const forbiddenWordsMiddleware = ( { dispatch } ) => {
         const foundWord = forbiddenWords.filter( word =>
           action.payload.title.includes( word )
         );
-        if (foundWord.length) {
-          return dispatch( foundBadWord() );
+        if (foundWord.length || !action.payload.title) {
+          return dispatch( handleError() );
         }
+      }
+      if (action.type === REMOVE_ARTICLE && getState().articles.length === 0) {
+        alert( 'There is no article' );
+        return
       }
       return next( action );
     };

@@ -14,7 +14,8 @@ class ConnectedForm extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      title: ""
+      title: "",
+      error: "Error during submit"
     };
   }
 
@@ -25,7 +26,7 @@ class ConnectedForm extends Component {
   handleSubmit = () => {
     const { title } = this.state;
     const id = uuid();
-    if (title) this.props.addArticle( { id, title } );
+    this.props.addArticle( { id, title } );
     this.setState( { title: "" } );
   };
 
@@ -41,7 +42,7 @@ class ConnectedForm extends Component {
             value={ title }
             onChange={ this.handleChange }
           />
-          { !store.getState().canAdd && <div className={'errorMsg'}> Can't add this article </div> }
+          { !store.getState().canAdd && <div className={ 'errorMsg' }> { this.state.error } </div> }
         </div>
         <button onClick={ this.handleSubmit }>
           Add Article
