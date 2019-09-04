@@ -1,15 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { addArticle, removeArticle, store } from "./redux/index";
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { store } from "./redux/index";
+import App from "./App";
 
-store.subscribe( () => console.log( 'Action done' ) );
+render(
+  <Provider store={ store }>
+    <App/>
+  </Provider>,
 
-ReactDOM.render( <> <App/>
-  <button onClick={ () => console.log( store.getState() ) }>Redux Store</button>
-  <button onClick={ () => store.dispatch( addArticle( 'An Article' ) ) }>Redux Add Article</button>
-  <button onClick={ () => store.dispatch( removeArticle() ) }>Redux Remove Last Article</button>
-</>, document.getElementById( 'root' ) );
-
-serviceWorker.unregister();
+  document.getElementById( "root" )
+);

@@ -1,7 +1,9 @@
 import { ADD_ARTICLE, REMOVE_ARTICLE } from "../constants/action-types";
 
 const initialState = {
-  articles: []
+  articles: [
+    { id: 0, title: 'First Article' }
+  ]
 };
 
 const rootReducer = ( state = initialState, action ) => {
@@ -16,7 +18,7 @@ const rootReducer = ( state = initialState, action ) => {
     const LG = state.articles.length - 1;
     return {
       ...state,
-      articles: state.articles.filter((value, index ) => index !== LG)
+      articles: state.articles.filter( ( value, index ) => index !== LG )
     };
   }
   return state

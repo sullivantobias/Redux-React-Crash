@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
+import List from "./components/List";
 
-function App() {
-  return (
-    <h1>React Redux Crash</h1>
-  );
-}
-
+const App = () => (
+  <div>
+    <div>
+      <h2>Redux React Crash Test</h2>
+      <List/>
+    </div>
+  </div>
+);
 export default App;
