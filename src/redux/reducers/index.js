@@ -1,7 +1,8 @@
-import { ADD_ARTICLE, REMOVE_ARTICLE } from "../constants/action-types";
+import { ADD_ARTICLE, FOUND_BAD_WORD, REMOVE_ARTICLE } from "../constants/action-types";
 
 const initialState = {
-  articles: []
+  articles: [],
+  canAdd: true
 };
 
 const rootReducer = ( state = initialState, action ) => {
@@ -9,7 +10,8 @@ const rootReducer = ( state = initialState, action ) => {
   if (action.type === ADD_ARTICLE) {
     return {
       ...state,
-      articles: [...state.articles, action.payload]
+      articles: [...state.articles, action.payload],
+      canAdd: true
     };
   }
   if (action.type === REMOVE_ARTICLE && state.articles.length) {
@@ -19,6 +21,13 @@ const rootReducer = ( state = initialState, action ) => {
       articles: state.articles.filter( ( value, index ) => index !== LG )
     };
   }
+  if (action.type === FOUND_BAD_WORD) {
+    return {
+      ...state,
+      canAdd: false
+    }
+  }
+
   return state
 };
 

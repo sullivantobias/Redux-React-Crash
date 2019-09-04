@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import uuid from "uuid";
 import { addArticle, removeArticle } from "../redux/actions/index";
+import { store } from "../redux/store";
+import { connect } from 'react-redux'
 
 const mapDispatchToProps = ( dispatch ) => ( {
     addArticle: article => dispatch( addArticle( article ) ),
     removeArticle: () => dispatch( removeArticle() )
   }
 );
-
 
 class ConnectedForm extends Component {
   constructor( props ) {
@@ -41,6 +41,7 @@ class ConnectedForm extends Component {
             value={ title }
             onChange={ this.handleChange }
           />
+          { !store.getState().canAdd && <div className={'errorMsg'}> Can't add this article </div> }
         </div>
         <button onClick={ this.handleSubmit }>
           Add Article
