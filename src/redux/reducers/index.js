@@ -1,9 +1,7 @@
 import { ADD_ARTICLE, REMOVE_ARTICLE } from "../constants/action-types";
 
 const initialState = {
-  articles: [
-    { id: 0, title: 'First Article' }
-  ]
+  articles: []
 };
 
 const rootReducer = ( state = initialState, action ) => {
@@ -14,7 +12,7 @@ const rootReducer = ( state = initialState, action ) => {
       articles: [...state.articles, action.payload]
     };
   }
-  if (action.type === REMOVE_ARTICLE) {
+  if (action.type === REMOVE_ARTICLE && state.articles.length) {
     const LG = state.articles.length - 1;
     return {
       ...state,

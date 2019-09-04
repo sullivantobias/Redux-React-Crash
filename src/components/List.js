@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-const mapStateToProps = state => {
-  return { articles: state.articles };
-};
+const mapStateToProps = state => ( { articles: state.articles } );
 
 const ConnectedList = ( { articles } ) => (
   <ul>
